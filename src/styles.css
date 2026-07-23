@@ -1,26 +1,35 @@
-body{
-    width: 90%;
-    height: 100vh;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    user-select: none;
+body {
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
 }
 
-table{
-    margin: 0 auto;
-    border-collapse: collapse;
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
 }
 
-tr{
-    border: 1px solid black;
-    height: 150px;
+tr {
+  border: 1px solid black;
+  height: 150px;
 }
 
-td{
-    border: 1px solid black;
-    width: 150px;
-    text-align: center;
-    font-size: 90px;
-    cursor: pointer;
+td {
+  border: 1px solid black;
+  width: 150px;
+  text-align: center;
+  font-size: 90px;
+  cursor: pointer;
+}
+
+button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
