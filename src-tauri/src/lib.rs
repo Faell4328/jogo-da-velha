@@ -75,13 +75,14 @@ fn apply_move(clicked_square: usize) -> String {
     check_winner(&mut game_state);
     if game_state.winner != None {
         let state = serde_json::to_string(&*game_state).unwrap();
-        check_reset(&mut game_state);
+        reset_game(&mut game_state);
         return state;
     }
-    check_reset(&mut game_state);
-    if game_state.is_draw == true {
+    if game_state.turn >= 9 {
+        game_state.is_draw = true;
+
         let state = serde_json::to_string(&*game_state).unwrap();
-        game_state.is_draw = false;
+        reset_game(&mut game_state);
         return state;
     }
 
@@ -94,30 +95,18 @@ fn get_state() -> String {
     return serde_json::to_string(&*game_state).unwrap();
 }
 
-fn check_reset(game_state: &mut GameState) {
-    if game_state.turn >= 9 {
-        game_state.squares = [" "; 9];
-        game_state.turn = 0;
-        game_state.is_draw = true;
-        game_state.winner = None;
-        game_state.err = "";
-    } else if game_state.winner != None {
-        game_state.squares = [" "; 9];
-        game_state.turn = 0;
-        game_state.is_draw = false;
-        game_state.winner = None;
-        game_state.err = "";
-    }
-}
-
-#[tauri::command]
-fn reset() {
-    let mut game_state = GAMESTATE.lock().unwrap();
+fn reset_game(game_state: &mut GameState) {
     game_state.squares = [" "; 9];
     game_state.turn = 0;
     game_state.is_draw = false;
     game_state.winner = None;
     game_state.err = "";
+}
+
+#[tauri::command]
+fn reset() {
+    let mut game_state = GAMESTATE.lock().unwrap();
+    reset_game(&mut game_state);
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

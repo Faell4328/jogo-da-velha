@@ -23,7 +23,7 @@ for (let cont = 0; cont < containers.length; cont++) {
       const msgEl = document.getElementById('message');
 
       if (state.winner != null) {
-        msgEl.innerHTML = `O ${state.winner} ganhou!`;
+        msgEl.innerHTML = `o ${state.winner} ganhou!`;
         showMessage = true;
         setTimeout(() => {
           updateUIFromState(['', '', '', '', '', '', '', '', '']);
